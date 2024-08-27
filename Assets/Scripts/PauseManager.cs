@@ -1,4 +1,7 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+
 
 public class PauseManager : MonoBehaviour
 {
@@ -28,4 +31,4 @@ public class PauseManager : MonoBehaviour
         // For example:
         // pauseMenuCanvas.SetActive(isPaused);
     }
-}
+}
