@@ -17,7 +17,7 @@ public class UpdateMoney : MonoBehaviour
 
     private bool autoClickerActive;
     private float autoClickerInterval = 2f; // Interval in seconds
-    private int autoClickerAmount = 10;     // Amount added per interval
+    private int autoClickerAmount = 20;     // Amount added per interval
     private float autoClickerTimer;
 
     void Start()
