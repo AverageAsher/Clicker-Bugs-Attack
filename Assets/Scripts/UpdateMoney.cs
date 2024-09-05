@@ -69,6 +69,14 @@ public class UpdateMoney : MonoBehaviour
 
     public void Buy(int num)
     {
+        // Ensure the previous upgrade has been purchased, except for the first upgrade
+        if (num > 0 && !wearing[num - 1])
+        {
+            Debug.Log("You need to buy the previous upgrade first!");
+            return;
+        }
+
+        // Check if the player has enough money to buy the upgrade
         if (money >= prices[num])
         {
             money -= prices[num];
@@ -88,7 +96,12 @@ public class UpdateMoney : MonoBehaviour
                 SpawnBugs();
             }
         }
+        else
+        {
+            Debug.Log("Not enough money to buy this upgrade.");
+        }
     }
+
 
     private void SpawnBugs()
     {

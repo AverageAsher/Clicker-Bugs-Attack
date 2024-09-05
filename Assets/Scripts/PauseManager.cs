@@ -12,6 +12,7 @@ public class PauseManager : MonoBehaviour
 
     void Start()
     {
+        Time.timeScale = 1;
         // Ensure the buttons are assigned and add listeners to them
         if (pauseButton != null)
         {
