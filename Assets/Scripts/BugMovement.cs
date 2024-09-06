@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class BugMovement : MonoBehaviour
 {
-    public float speed = 2f;
+    public float speed = 100f; // Increase speed to 5f
     private Transform target;
     private Vector3 startingPosition;
 
