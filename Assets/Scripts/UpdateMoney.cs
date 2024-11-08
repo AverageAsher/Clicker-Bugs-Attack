@@ -11,6 +11,7 @@ public class UpdateMoney : MonoBehaviour
     private int money;
 
     public GameObject Upgrades;
+    private GameObject bugs;
     private int[] prices;
     private bool[] wearing;
     public Button[] buttons;
@@ -31,6 +32,8 @@ public class UpdateMoney : MonoBehaviour
         wearing = new bool[4];
         autoClickerActive = false;
         autoClickerTimer = 0f;
+
+        LoadProgress(); // Load saved progress on start
     }
 
     private void Update()
@@ -65,6 +68,7 @@ public class UpdateMoney : MonoBehaviour
     {
         money++;
         moneyText.text = "Money: " + money;
+        SaveProgress(); // Save progress after money changes
     }
 
     public void Buy(int num)
@@ -95,6 +99,8 @@ public class UpdateMoney : MonoBehaviour
             {
                 SpawnBugs();
             }
+
+            SaveProgress(); // Save progress after buying an upgrade
         }
         else
         {
@@ -102,10 +108,9 @@ public class UpdateMoney : MonoBehaviour
         }
     }
 
-
     private void SpawnBugs()
     {
-        GameObject bug = Instantiate(bugPrefab, bugSpawnPoint.position, Quaternion.identity, bugSpawnPoint);
+        bugs = Instantiate(bugPrefab, bugSpawnPoint.position, Quaternion.identity, bugSpawnPoint);
         // Add any additional logic for the bugs if needed
     }
 
@@ -113,5 +118,77 @@ public class UpdateMoney : MonoBehaviour
     {
         money -= amount;
         moneyText.text = "Money: " + money;
+        SaveProgress(); // Save progress after money deduction
+    }
+
+    private void SaveProgress()
+    {
+        PlayerPrefs.SetInt("Money", money);
+
+        // Save wearing array as a string
+        for (int i = 0; i < wearing.Length; i++)
+        {
+            PlayerPrefs.SetInt("Wearing" + i, wearing[i] ? 1 : 0);
+        }
+
+        // Save autoClickerActive status
+        PlayerPrefs.SetInt("AutoClickerActive", autoClickerActive ? 1 : 0);
+
+        PlayerPrefs.Save();
+    }
+
+    private void LoadProgress()
+    {
+        money = PlayerPrefs.GetInt("Money", 0);
+        moneyText.text = "Money: " + money;
+
+        // Load wearing array
+        for (int i = 0; i < wearing.Length; i++)
+        {
+            wearing[i] = PlayerPrefs.GetInt("Wearing" + i, 0) == 1;
+            if (wearing[i])
+            {
+                Upgrades.transform.GetChild(i).gameObject.SetActive(true);
+            }
+
+            if (i == 1 && wearing[i]) SpawnBugs();
+        }
+
+        // Load autoClickerActive status
+        autoClickerActive = PlayerPrefs.GetInt("AutoClickerActive", 0) == 1;
+    }
+
+    private void OnApplicationQuit()
+    {
+        SaveProgress(); // Ensure progress is saved when the game closes
+    }
+
+    // New method to reset progress
+    public void ResetProgress()
+    {
+        Destroy(bugs);
+        // Clear all saved data
+        PlayerPrefs.DeleteAll();
+
+        // Reset variables to default values
+        money = 0;
+        moneyText.text = "Money: " + money;
+
+        autoClickerActive = false;
+        autoClickerTimer = 0f;
+
+        for (int i = 0; i < wearing.Length; i++)
+        {
+            wearing[i] = false;
+            Upgrades.transform.GetChild(i).gameObject.SetActive(false);
+        }
+
+        // Disable all upgrade buttons
+        foreach (Button button in buttons)
+        {
+            button.interactable = false;
+        }
+
+        Debug.Log("Progress has been reset to default.");
     }
 }
