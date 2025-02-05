@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class PauseManager : MonoBehaviour
@@ -9,6 +10,7 @@ public class PauseManager : MonoBehaviour
     public GameObject pauseCanvas;
     public Button pauseButton; // Reference to the pause button
     public Button resumeButton; // Reference to the resume button
+    public GameObject save;
 
     void Start()
     {
@@ -39,6 +41,17 @@ public class PauseManager : MonoBehaviour
         isPaused = !isPaused;
         Time.timeScale = isPaused ? 0 : 1;
         pauseCanvas.SetActive(isPaused);
+        
+
+        if (isPaused == true)
+        {
+            EventSystem.current.SetSelectedGameObject(save);
+        }
+
+        else
+        {
+            EventSystem.current.SetSelectedGameObject(pauseButton.gameObject);
+        }
     }
 
     public void ResumeGame()

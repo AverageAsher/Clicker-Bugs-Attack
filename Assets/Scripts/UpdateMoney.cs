@@ -1,12 +1,14 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class UpdateMoney : MonoBehaviour
 {
     public TMP_Text moneyText;
     public GameObject bugPrefab; // Assign your bug prefab in the inspector
     public Transform bugSpawnPoint; // Assign the right middle of the screen as the spawn point
+    public GameObject pauseButton;
 
     private int money;
 
@@ -101,6 +103,7 @@ public class UpdateMoney : MonoBehaviour
             }
 
             SaveProgress(); // Save progress after buying an upgrade
+            EventSystem.current.SetSelectedGameObject(pauseButton);
         }
         else
         {
