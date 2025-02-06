@@ -3019,6 +3019,7 @@ MonoBehaviour:
   moneyText: {fileID: 1413686146}
   bugPrefab: {fileID: 2717041080588038519, guid: e4799fa5b9312734d936d8fc92b1640d, type: 3}
   bugSpawnPoint: {fileID: 553233647}
+  pauseButton: {fileID: 1858808419}
   Upgrades: {fileID: 874385617}
   buttons:
   - {fileID: 2074416071}

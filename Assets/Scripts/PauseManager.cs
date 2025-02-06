@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class PauseManager : MonoBehaviour
 {
-    private bool isPaused = false;
+    public bool isPaused = false;
     public GameObject pauseCanvas;
     public Button pauseButton; // Reference to the pause button
     public Button resumeButton; // Reference to the resume button

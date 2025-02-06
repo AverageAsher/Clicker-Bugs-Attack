@@ -22,6 +22,7 @@ public class UpdateMoney : MonoBehaviour
     private float autoClickerInterval = 2f; // Interval in seconds
     private int autoClickerAmount = 20;     // Amount added per interval
     private float autoClickerTimer;
+    private bool bugSpawned; 
 
     void Start()
     {
@@ -69,6 +70,8 @@ public class UpdateMoney : MonoBehaviour
     public void AddMoney()
     {
         money++;
+        if (money == 200)
+            SpawnBugs();
         moneyText.text = "Money: " + money;
         SaveProgress(); // Save progress after money changes
     }
@@ -113,7 +116,9 @@ public class UpdateMoney : MonoBehaviour
 
     private void SpawnBugs()
     {
-        bugs = Instantiate(bugPrefab, bugSpawnPoint.position, Quaternion.identity, bugSpawnPoint);
+        if (bugs == null) 
+             bugs = Instantiate(bugPrefab, bugSpawnPoint.position, Quaternion.identity, bugSpawnPoint);
+        bugSpawned = true;
         // Add any additional logic for the bugs if needed
     }
 

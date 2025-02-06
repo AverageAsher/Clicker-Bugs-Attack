@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: -2865774089849066752}
   m_Layer: 0
   m_Name: Bug1
-  m_TagString: Untagged
+  m_TagString: Bug1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -192,4 +192,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afaabd2b7282dd841b23919a4f79f3be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 110
+  speed: 271.5

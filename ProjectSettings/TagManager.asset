@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Dollars
   - Wall
+  - Bug1
+  - Bug2
+  - Bug3
   layers:
   - Default
   - TransparentFX
